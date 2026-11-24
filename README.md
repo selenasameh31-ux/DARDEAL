@@ -41,13 +41,13 @@ DarDeal is a real estate marketplace app for Fayoum, Egypt. Seekers can browse a
 - **speech_to_text** - voice input for DarBot
 - **intl / flutter_localizations** - localization
 
-## Screenshots and Demo
 
-<!-- Screenshots and demo coming soon -->
 
-**Demo video:** coming soon.
+**Demo video:** 
 
-## Getting Started
+https://github.com/user-attachments/assets/c6f84e91-3021-4054-9de6-1b4c854b5ca1
+
+
 
 ### Prerequisites
 
