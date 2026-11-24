@@ -1,0 +1,92 @@
+يعني إيه JSON أصلاً؟
+
+لما الأبليكيشن يكلم السيرفر (API)، السيرفر بيرجع البيانات بالشكل ده:
+
+{
+  "success": true,
+  "data": {
+    "token": "abc123",
+    "refreshToken": "xyz456",
+    "expiration": "2026-02-20",
+    "user": {
+      "id": "1",
+      "name": "Marina",
+      "email": "test@mail.com"
+    }
+  }
+}
+
+ده اسمه JSON
+وده مجرد Text منظم السيرفر بيرجعه.
+
+طيب Flutter بيعمل إيه بالـ JSON ده؟
+
+فلاتر ميقدرش يتعامل مع JSON مباشرة جوه الكود
+هو محتاج يحوله لكلاس Dart.
+
+عشان كدا بنكتب:
+
+factory UserModel.fromJson(Map<String, dynamic> json)
+
+دي وظيفة اسمها:
+
+"Parsing"
+
+يعني:
+
+ترجمة JSON ك Object نقدر نتعامل معاه
+
+يعني إيه UserModel بيفهم JSON ؟
+
+معناها إن:
+
+السيرفر يرجع JSON
+
+UserModel ياخده
+
+يقرأ المفاتيح (token - user - name...)
+
+يحولهم لقيم جوه كلاس Dart
+
+فبقى عندك Object يعني
+
+userModel.user.name
+
+بدل ما اقعد اعمل : 
+
+response["data"]["user"]["name"]
+
+وده أسهل وأأمن.
+
+طب ليه الـ Entity مفيهاش fromJson؟
+
+هنا بقى النقطة المهمة 
+
+Clean Architecture بتقول:
+
+Data Layer = مسؤولة عن التعامل مع API و JSON
+
+Domain Layer = مسؤولة عن منطق التطبيق فقط
+
+يعني الـ Domain ميعرفش أصلاً إن فيه حاجة اسمها JSON
+ولا يعرف إن فيه API
+ولا يعرف إن فيه Dio
+
+هو عايز:
+
+"User عنده id و name و email"
+
+بس كدا.
+
+الفرق ببساطة:
+UserModel
+
+* مرتبط بالسيرفر
+* فيه fromJson
+* ممكن يتغير لو الـ API اتغير
+
+UserEntity
+
+* مرتبط بالمنطق بتاع التطبيق
+* ملوش دعوة بالسيرفر
+* ثابت حتى لو غيرت API
